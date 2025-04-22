@@ -41,6 +41,18 @@ struct AddExpenseView: View {
     }
 }
 
+private func addExpense(){
+    guard let validAmount = Double(amount) else{
+        return
+    }
+
+    let newExpense = Expense(category: category, amount: validAmount, date: date)
+    modelContext.insert(newExpense)
+    dismiss()
+}
+
+
+
 #Preview {
     AddExpenseView()
 }
