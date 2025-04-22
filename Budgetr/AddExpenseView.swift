@@ -4,6 +4,8 @@
 //
 //  Created by Riley Bowling on 4/10/25.
 //
+//
+//
 
 import SwiftUI
 import SwiftData
@@ -24,11 +26,16 @@ struct AddExpenseView: View {
                 Section(header: Text ("Category")){
                     TextField("Enter category", text: $category)
                 }
-            }
 
-            Section(header: Text("Amount")){
-                TextField("Enter amount", text: $amount)
-                .keyboardType(.decimalPad)
+                Section(header: Text("Amount")){
+                    TextField("Enter amount", text: $amount)
+                    .keyboardType(.decimalPad)
+                }
+
+                Section(header: Text("Date")){
+                    TextField("Select date", selection $date, displayedComponents: .date)
+                }
+
             }
         }
     }
