@@ -19,7 +19,18 @@ struct AddExpenseView: View {
     @State private var date: Date = Date()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            Form{
+                Section(header: Text ("Category")){
+                    TextField("Enter category", text: $category)
+                }
+            }
+
+            Section(header: Text("Amount")){
+                TextField("Enter amount", text: $amount)
+                .keyboardType(.decimalPad)
+            }
+        }
     }
 }
 
