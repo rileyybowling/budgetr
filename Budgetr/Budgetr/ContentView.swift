@@ -18,6 +18,7 @@ struct ContentView: View {
                 .foregroundStyle(Color.black)
                 Spacer()
                 Text("Budgetr")
+                    .bold()
                 Spacer()
                 NavigationLink(destination: ContentView()) {
                     Label("", systemImage: "bell.fill")
