@@ -37,7 +37,7 @@ struct AddExpenseView: View {
                 }
                 
                 Section(header: Text("Date")){
-                    TextField("Select date", selection $date, displayedComponents: .date)
+                    DatePicker("Select date", selection: $date, displayedComponents: .date)
                 }
                 
             }
