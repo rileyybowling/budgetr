@@ -17,6 +17,7 @@ struct AddExpenseView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State private var category: String = ""
+    @State private var customCategory: String = ""
     @State private var amount: Double = 0.0
     @State private var date: Date = Date()
     
@@ -24,7 +25,7 @@ struct AddExpenseView: View {
         NavigationView{
             Form{
                 Section(header: Text ("Category")){
-                    TextField("Enter category", text: $category)
+                    TextField("Enter category", selection $category, displayedComponents: .category)
                 }
 
                 Section(header: Text("Amount")){
