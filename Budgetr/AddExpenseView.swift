@@ -39,7 +39,6 @@ struct AddExpenseView: View {
                     }
                 }
 
-
                 Section(header: Text("Amount")){
                     TextField("Enter amount", text: $amount)
                     .keyboardType(.decimalPad)
@@ -52,6 +51,10 @@ struct AddExpenseView: View {
             }
         }
     }
+}
+
+private func selectedCategory() -> String {
+        return category == "Other" ? customCategory : category
 }
 
 private func addExpense(){
