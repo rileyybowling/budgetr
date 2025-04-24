@@ -20,13 +20,25 @@ struct AddExpenseView: View {
     @State private var customCategory: String = ""
     @State private var amount: Double = 0.0
     @State private var date: Date = Date()
+
+    let categories = ["Work", "Rent", "Gift", "Transportation", "Food", "Health", "Gas", "Other"]
     
     var body: some View {
         NavigationView{
             Form{
-                Section(header: Text ("Category")){
-                    TextField("Enter category", selection $category, displayedComponents: .category)
+                Section(header: Text("Category")) {
+                    Picker("Select category", selection: $category) {
+                        ForEach(categories, id: \.self) { category in
+                            Text(category)
+                        }
+                    }
+                    .pickerStyle(.menu)
+
+                    if category == "Other" {
+                        TextField("Enter custom category", text: $customCategory)
+                    }
                 }
+
 
                 Section(header: Text("Amount")){
                     TextField("Enter amount", text: $amount)
