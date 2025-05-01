@@ -34,6 +34,8 @@ struct ContentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
+        
+        NavbarView()
     }
 }
 
