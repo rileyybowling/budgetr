@@ -39,8 +39,30 @@ struct AddExpenseView: View {
                 Section(header: Text("Date")){
                     DatePicker("Select date", selection: $date, displayedComponents: .date)
                 }
+                Section {
+                    HStack {
+                        Button("Cancel") {
+                            dismiss()
+                        }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                                            
+                        Button("Save") {
+                            addExpense()
+                        }
+                        .disabled(category.isEmpty ||   Double(amount) == nil)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                        }
+                    }
                 
             }
+            .navigationTitle("Add Expense")
         }
     }
     
