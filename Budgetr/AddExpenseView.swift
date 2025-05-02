@@ -9,7 +9,11 @@ struct AddExpenseView: View {
     @State private var date: Date = Date()
 
     let categories = ["Groceries", "Dining Out", "Personal Spending", "Transportation", "Insurance", "Travel", "Medical", "Debt Payoff", "Tuition", "Rent", "Utilities", "Mortgage", "Other", "Work", "Gift", "Pay"]
-
+    
+    var amountValue: Double {
+        Double(amount) ?? 0.0
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -25,7 +29,7 @@ struct AddExpenseView: View {
                         TextField("Enter custom category", text: $customCategory)
                     }
                 }
-
+        
                 Section(header: Text("Amount")) {
                     TextField("Enter amount", text: $amount)
                         .keyboardType(.decimalPad)
@@ -60,4 +64,8 @@ struct AddExpenseView: View {
         modelContext.insert(newExpense)
         dismiss()
     }
+}
+
+#Preview {
+    AddExpenseView()
 }
