@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @Query(sort: \Expense.date, order: .reverse) private var expenses: [Expense]
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -43,7 +43,7 @@ struct ContentView: View {
                 .fill(LinearGradient(colors: [.green, .blue], startPoint: .top, endPoint: .bottom))
                 .frame(width: 200, height: 200)
             Spacer()
-
+            
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(expenses.prefix(5)) { expense in
@@ -52,18 +52,67 @@ struct ContentView: View {
                 }
                 .padding()
             }
-
+            
             Spacer()
+            // Bottom Navigation Bar
+            HStack {
+                NavigationLink(destination: AddExpenseView()) {
+                    VStack {
+                        Image(systemName: "plus.square")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.black)
+                        Text("Add Expense")
+                            .font(.caption)
+                            .foregroundColor(Color.black)
+                    }
+                    .frame(maxWidth: .infinity) // ✅ each button same width
+                }
+
+                NavigationLink(destination: ContentView()) {
+                    VStack {
+                        Image(systemName: "house.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.black)
+                        Text("Home")
+                            .font(.caption)
+                            .foregroundColor(Color.black)
+                    }
+                    .frame(maxWidth: .infinity) // ✅
+                }
+
+                NavigationLink(destination: BudgetView()) {
+                    VStack {
+                        Image(systemName: "wallet.bifold")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.black)
+                        Text("Budget")
+                            .font(.caption)
+                            .foregroundColor(Color.black)
+                    }
+                    .frame(maxWidth: .infinity) // ✅
+                }
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+            .padding(.bottom, 12)
+            .frame(height: 90)
+            .background(Color(hex: 0x9B8BF4).ignoresSafeArea())
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(radius: 5)
         }
         .padding()
-        
-        NavbarView()
     }
 }
 
 struct TransactionRow: View {
     var expense: Expense
-
+    
     var body: some View {
         HStack {
             Image(systemName: iconName(for: expense.category))
@@ -88,7 +137,7 @@ struct TransactionRow: View {
         .background(Color(.secondarySystemBackground))
         .cornerRadius(12)
     }
-
+    
     func iconName(for category: String) -> String {
         switch category {
         case "Transportation": return "car.fill"
@@ -109,4 +158,8 @@ extension Color {
             blue: Double(hex & 0xFF) / 255.0
         )
     }
+}
+
+#Preview {
+    ContentView()
 }
