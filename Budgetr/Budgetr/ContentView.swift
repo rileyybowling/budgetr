@@ -56,6 +56,8 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
+        
+        NavbarView()
     }
 }
 
