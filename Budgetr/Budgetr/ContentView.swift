@@ -27,7 +27,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: NotificationsView()) {
+                NavigationLink(destination: BudgetView()) {
                     Label("", systemImage: "bell.fill")
                 }
                 .padding(10)
@@ -97,5 +97,16 @@ struct TransactionRow: View {
         case "Gift": return "gift.fill"
         default: return "tag.fill"
         }
+    }
+}
+
+
+extension Color {
+    init(hex: Int) {
+        self.init(
+            red: Double((hex >> 16) & 0xFF) / 255.0,
+            green: Double((hex >> 8) & 0xFF) / 255.0,
+            blue: Double(hex & 0xFF) / 255.0
+        )
     }
 }

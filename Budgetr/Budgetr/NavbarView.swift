@@ -72,6 +72,16 @@ struct NavbarView: View {
     }
 }
 
+extension Color {
+    init(hexRGB: Int) {
+        self.init(
+            red: Double((hexRGB >> 16) & 0xFF) / 255.0,
+            green: Double((hexRGB >> 8) & 0xFF) / 255.0,
+            blue: Double(hexRGB & 0xFF) / 255.0
+        )
+    }
+}
+
 #Preview {
     NavbarView()
 }
