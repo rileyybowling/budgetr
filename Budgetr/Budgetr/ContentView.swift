@@ -15,10 +15,6 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    
-                    
-    
-                    
                     Text("Budgetr")
                         .bold()
                         .padding(.leading, 10)
