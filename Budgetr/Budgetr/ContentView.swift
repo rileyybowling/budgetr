@@ -84,7 +84,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity) // ✅
                     }
                     
-                    NavigationLink(destination: BudgetView()) {
+                    NavigationLink(destination: BudgetEditView()) {
                         VStack {
                             Image(systemName: "wallet.bifold")
                                 .resizable()

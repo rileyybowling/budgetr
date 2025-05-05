@@ -29,40 +29,50 @@ struct AddExpenseView: View {
                     Picker("Select category", selection: $category) {
                         ForEach(categories, id: \.self) { category in
                             Text(category)
+                                .font(.custom("Avenir", size: 15))
                         }
                     }
+                    .font(.custom("Avenir", size: 20))
                     .pickerStyle(.menu)
                     
                     if category == "Other" {
                         TextField("Enter custom category", text: $customCategory)
+                            .font(.custom("Avenir", size: 20))
                     }
                 }
-                
-                Section(header: Text("Amount")) {
+                Section(header: Text("Amount (income will go into budget)")) {
                     TextField("Enter amount", text: $amount)
+                        .font(.custom("Avenir", size: 20))
                         .keyboardType(.decimalPad)
                     
                     Toggle("Is this income?", isOn: $isIncome)
+                        .font(.custom("Avenir", size: 20))
                 }
+                .font(.custom("Avenir", size: 12))
                 
                 Section(header: Text("Date")) {
                     DatePicker("Select date", selection: $date, displayedComponents: .date)
+                        .font(.custom("Avenir", size: 20))
                 }
+                .font(.custom("Avenir", size: 12))
                 
                 Section {
                     VStack {
                         if category.isEmpty {
                             Text("Please enter a category.")
+                                .font(.custom("Avenir", size: 20))
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
                         if amount.isEmpty {
                             Text("Please enter a dollar amount.")
+                                .font(.custom("Avenir", size: 20))
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
                         if (!category.isEmpty && !amount.isEmpty){
                             Button("Cancel") {
                                 dismiss()
                             }
+                            .font(.custom("Avenir", size: 20))
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.gray.opacity(0.2))
@@ -72,6 +82,7 @@ struct AddExpenseView: View {
                             Button("Save") {
                                 addExpense()
                             }
+                            .font(.custom("Avenir", size: 20))
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color(hex: 0x9B8BF4))
@@ -81,7 +92,14 @@ struct AddExpenseView: View {
                     }
                 }
             }
-            .navigationTitle("Add Expense")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Add Expense")
+                        .font(.custom("Avenir", size: 37))
+                        .bold()
+                }
+            }
         }
     }
     

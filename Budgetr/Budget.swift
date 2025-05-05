@@ -8,6 +8,8 @@
 import Foundation
 import SwiftData
 
+//TODO: change left to remaining
+
 @Model
 class Budget {
     var name: String
