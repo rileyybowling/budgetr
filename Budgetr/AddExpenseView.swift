@@ -12,8 +12,8 @@ struct AddExpenseView: View {
     @State private var date: Date = Date()
     @State private var showAlert = false
     
-    @ObservedObject var expenseStorage = ExpenseStorage()
-    @ObservedObject var budgetStorage = BudgetStorage()
+    @EnvironmentObject var expenseStorage: ExpenseStorage
+    @EnvironmentObject var budgetStorage: BudgetStorage
     
     
     var categories = ["Groceries", "Dining Out", "Personal Spending", "Transportation", "Insurance", "Travel", "Medical", "Debt Payoff", "Tuition", "Rent", "Utilities", "Mortgage", "Other", "Work", "Gift", "Pay", "Unknown"]
@@ -101,6 +101,8 @@ struct AddExpenseView: View {
                 }
             }
         }
+        .environmentObject(budgetStorage)
+        .environmentObject(expenseStorage)
     }
     
     private func selectedCategory() -> String {

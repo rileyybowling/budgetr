@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class ExpenseStorage: ObservableObject {
     @Published var expenses: [Expense] = []

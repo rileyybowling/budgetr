@@ -9,8 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query(sort: \Expense.date, order: .reverse) private var expenses: [Expense]
-    
+    @StateObject var expenseStorage = ExpenseStorage()
+    @StateObject private var budgetStorage = BudgetStorage()
+        
     var body: some View {
         NavigationStack {
             VStack {
@@ -22,35 +23,57 @@ struct ContentView: View {
                     
                     Spacer()
                     NavigationLink(destination: SettingsView()) {
-                                            Label("", systemImage: "gearshape.2.fill")
-                                        }
-                                        .padding(10)
-                                        .foregroundStyle(Color.black)
-
-//                    NavigationLink(destination: BudgetView()) {
-//                        Label("", systemImage: "bell.fill")
-//                    }
-//                    .padding(10)
-//                    .foregroundStyle(Color.black)
+                        Label("", systemImage: "gearshape.2.fill")
+                    }
+                    .padding(10)
+                    .foregroundStyle(Color.black)
+                    
+                    //                    NavigationLink(destination: BudgetView()) {
+                    //                        Label("", systemImage: "bell.fill")
+                    //                    }
+                    //                    .padding(10)
+                    //                    .foregroundStyle(Color.black)
                 }
                 .frame(height: 75)
                 .background(Color(hex: 0x9B8BF4).ignoresSafeArea())
                 .clipShape(RoundedRectangle(cornerRadius: 12))
-                
-                //Created placeholder for the chart
-                Spacer()
-                Circle()
-                    .fill(LinearGradient(colors: [.green, .blue], startPoint: .top, endPoint: .bottom))
-                    .frame(width: 200, height: 200)
-                Spacer()
+      
+                ZStack {
+                    let progress = (budgetStorage.budget?.left ?? 0.0) / (budgetStorage.budget?.limit ?? 0.0)
+                    // Background Circle (for total budget)
+                    Circle()
+                        .stroke(Color.red.opacity(0.5), lineWidth: 20)
+                        .frame(width: 200, height: 200)
+                    
+                    // Foreground Circle (for used budget)
+                    Circle()
+                        .trim(from: 0.0, to: progress)
+                        .stroke(Color.green, lineWidth: 20)
+                        .rotationEffect(.degrees(-90))
+                        .frame(width: 200, height: 200)
+                        .animation(.easeInOut, value: progress)
+                        .onAppear {
+                            print("limit: \(budgetStorage.budget?.limit ?? 100)")
+                            print("left: \(budgetStorage.budget?.left ?? 100)")
+                        }
+                }
+                .padding()
                 //recent activity
                 ScrollView {
                     VStack(spacing: 16) {
-                        ForEach(expenses.prefix(5)) { expense in
-                            TransactionRow(expense: expense)
+                        ForEach(expenseStorage.expenses, id: \.self) { expense in
+                            VStack(alignment: .leading) {
+                                Text("Category: \(expense.category)")
+                                    .font(.headline)
+                                Text("$\(expense.amount, specifier: "%.2f")")
+                                    .font(.subheadline)
+                            }
                         }
                     }
                     .padding()
+                }
+                .onAppear {
+                    print("Count: \(expenseStorage.expenses.count)")
                 }
                 
                 Spacer()
@@ -108,6 +131,8 @@ struct ContentView: View {
             }
             .padding()
         }
+        .environmentObject(expenseStorage)
+        .environmentObject(budgetStorage)
     }
 }
 
