@@ -34,7 +34,6 @@ struct AddExpenseView: View {
                     }
                     .font(.custom("Avenir", size: 20))
                     .pickerStyle(.menu)
-                    
                     if category == "Other" {
                         TextField("Enter custom category", text: $customCategory)
                             .font(.custom("Avenir", size: 20))
@@ -49,13 +48,11 @@ struct AddExpenseView: View {
                         .font(.custom("Avenir", size: 20))
                 }
                 .font(.custom("Avenir", size: 12))
-                
                 Section(header: Text("Date")) {
                     DatePicker("Select date", selection: $date, displayedComponents: .date)
                         .font(.custom("Avenir", size: 20))
                 }
                 .font(.custom("Avenir", size: 12))
-                
                 Section {
                     VStack {
                         if category.isEmpty {
@@ -115,7 +112,6 @@ struct AddExpenseView: View {
         budgetStorage.budget?.left += finalAmount
         modelContext.insert(newExpense)
         expenseStorage.expenses.append(newExpense)
-        
         dismiss()
     }
 }

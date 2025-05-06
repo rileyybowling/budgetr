@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @StateObject var expenseStorage = ExpenseStorage()
     @StateObject private var budgetStorage = BudgetStorage()
-        
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -20,62 +20,67 @@ struct ContentView: View {
                         .bold()
                         .padding(.leading, 10)
                         .font(.custom("Avenir", size: 20))
-                    
                     Spacer()
-                    NavigationLink(destination: SettingsView()) {
-                        Label("", systemImage: "gearshape.2.fill")
+                    NavigationLink(destination: ActivityView()) {
+                        Label("", systemImage: "bell.fill")
                     }
                     .padding(10)
                     .foregroundStyle(Color.black)
-                    
-                    //                    NavigationLink(destination: BudgetView()) {
-                    //                        Label("", systemImage: "bell.fill")
-                    //                    }
-                    //                    .padding(10)
-                    //                    .foregroundStyle(Color.black)
+//                    NavigationLink(destination: BudgetView()) {
+//                        Label("", systemImage: "bell.fill")
+//                    }
+//                    .padding(10)
+//                    .foregroundStyle(Color.black)
                 }
                 .frame(height: 75)
                 .background(Color(hex: 0x9B8BF4).ignoresSafeArea())
                 .clipShape(RoundedRectangle(cornerRadius: 12))
-      
+                
                 ZStack {
-                    let progress = (budgetStorage.budget?.left ?? 0.0) / (budgetStorage.budget?.limit ?? 0.0)
-                    // Background Circle (for total budget)
-                    Circle()
-                        .stroke(Color.red.opacity(0.5), lineWidth: 20)
-                        .frame(width: 200, height: 200)
-                    
-                    // Foreground Circle (for used budget)
-                    Circle()
-                        .trim(from: 0.0, to: progress)
-                        .stroke(Color.green, lineWidth: 20)
-                        .rotationEffect(.degrees(-90))
-                        .frame(width: 200, height: 200)
-                        .animation(.easeInOut, value: progress)
-                        .onAppear {
-                            print("limit: \(budgetStorage.budget?.limit ?? 100)")
-                            print("left: \(budgetStorage.budget?.left ?? 100)")
+                    if budgetStorage.budget != nil {
+                        let progress = (budgetStorage.budget?.left ?? 0.0) / (budgetStorage.budget?.limit ?? 0.0)
+                        // background circle (for total budget)
+                        Circle()
+                            .stroke(Color.red.opacity(0.5), lineWidth: 20)
+                            .frame(width: 200, height: 200)
+                        // foreground circle (for used budget)
+                        Circle()
+                            .trim(from: 0.0, to: progress)
+                            .stroke(Color.green, lineWidth: 20)
+                            .rotationEffect(.degrees(-90))
+                            .frame(width: 200, height: 200)
+                            .animation(.easeInOut, value: progress)
+                    } else {
+                        VStack(alignment: .center) {
+                            Text("You do not have a budget.")
+                                .font(.custom("Avenir", size: 25.0))
+                                .padding()
+                            Text("Click the wallet in the lower right-hand corner to begin")
+                                .font(.custom("Avenir", size: 25.0))
                         }
+                    }
+                    
                 }
                 .padding()
                 //recent activity
                 ScrollView {
                     VStack(spacing: 16) {
-                        ForEach(expenseStorage.expenses, id: \.self) { expense in
-                            VStack(alignment: .leading) {
-                                Text("Category: \(expense.category)")
-                                    .font(.headline)
+                        let recentExpenses = expenseStorage.expenses.suffix(5).reversed()
+                        ForEach(Array(recentExpenses), id: \.self) { expense in
+                            HStack() {
+                                Text("\(expense.category)")
+                                    .font(.custom("Avenir", size: 20))
+                                    .bold()
                                 Text("$\(expense.amount, specifier: "%.2f")")
-                                    .font(.subheadline)
+                                    .font(.custom("Avenir", size: 20))
+                                Spacer()
+                                Text("\(expense.date.formatted(.dateTime.month().day().year()))")
+                                    .font(.custom("Avenir", size: 20))
                             }
                         }
                     }
                     .padding()
                 }
-                .onAppear {
-                    print("Count: \(expenseStorage.expenses.count)")
-                }
-                
                 Spacer()
                 // Bottom Navigation Bar
                 HStack {
@@ -92,7 +97,6 @@ struct ContentView: View {
                         }
                         .frame(maxWidth: .infinity) // ✅ each button same width
                     }
-                    
                     NavigationLink(destination: ContentView()) {
                         VStack {
                             Image(systemName: "house.fill")
@@ -106,7 +110,6 @@ struct ContentView: View {
                         }
                         .frame(maxWidth: .infinity) // ✅
                     }
-                    
                     NavigationLink(destination: BudgetEditView()) {
                         VStack {
                             Image(systemName: "wallet.bifold")
@@ -136,45 +139,45 @@ struct ContentView: View {
     }
 }
 
-struct TransactionRow: View {
-    var expense: Expense
-    
-    var body: some View {
-        HStack {
-            Image(systemName: iconName(for: expense.category))
-                .font(.system(size: 24))
-                .foregroundColor(.blue)
-            
-            VStack(alignment: .leading) {
-                Text(expense.category)
-                    .font(.subheadline)
-                    .bold()
-            }
-            Spacer()
-            HStack {
-                Image(systemName: expense.amount >= 0 ? "arrow.up.right" : "arrow.down.right")
-                    .foregroundColor(expense.amount >= 0 ? .green : .red)
-                Text(String(format: "$%.2f", abs(expense.amount)))
-                    .foregroundColor(expense.amount >= 0 ? .green : .red)
-                    .bold()
-            }
-        }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(12)
-    }
-    
-    func iconName(for category: String) -> String {
-        switch category {
-        case "Transportation": return "car.fill"
-        case "Rent": return "house.fill"
-        case "Pay": return "dollarsign.circle.fill"
-        case "Gift": return "gift.fill"
-        default: return "tag.fill"
-        }
-    }
-}
-
+// completely unused?
+//struct TransactionRow: View {
+//    var expense: Expense
+//    
+//    var body: some View {
+//        HStack {
+//            Image(systemName: iconName(for: expense.category))
+//                .font(.system(size: 24))
+//                .foregroundColor(.blue)
+//            
+//            VStack(alignment: .leading) {
+//                Text(expense.category)
+//                    .font(.subheadline)
+//                    .bold()
+//            }
+//            Spacer()
+//            HStack {
+//                Image(systemName: expense.amount >= 0 ? "arrow.up.right" : "arrow.down.right")
+//                    .foregroundColor(expense.amount >= 0 ? .green : .red)
+//                Text(String(format: "$%.2f", abs(expense.amount)))
+//                    .foregroundColor(expense.amount >= 0 ? .green : .red)
+//                    .bold()
+//            }
+//        }
+//        .padding()
+//        .background(Color(.secondarySystemBackground))
+//        .cornerRadius(12)
+//    }
+//    
+//    func iconName(for category: String) -> String {
+//        switch category {
+//        case "Transportation": return "car.fill"
+//        case "Rent": return "house.fill"
+//        case "Pay": return "dollarsign.circle.fill"
+//        case "Gift": return "gift.fill"
+//        default: return "tag.fill"
+//        }
+//    }
+//}
 
 extension Color {
     init(hex: Int) {

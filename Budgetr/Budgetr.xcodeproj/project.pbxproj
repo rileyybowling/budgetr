@@ -10,6 +10,7 @@
 		33A4DC852DC330C100E1C295 /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4DC842DC330C100E1C295 /* BudgetView.swift */; };
 		3E33019C2DC858BE00FF2934 /* ExpenseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33019B2DC858BE00FF2934 /* ExpenseStorage.swift */; };
 		3E33019E2DC8719300FF2934 /* BudgetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33019D2DC8719300FF2934 /* BudgetStorage.swift */; };
+		3E3301A02DC9C90E00FF2934 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E33019F2DC9C90E00FF2934 /* ActivityView.swift */; };
 		3E4274622DA80AA900791EA9 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4274612DA80AA900791EA9 /* Budget.swift */; };
 		3E4274642DA80ACF00791EA9 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4274632DA80ACF00791EA9 /* Expense.swift */; };
 		3E4274662DA80AF700791EA9 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4274652DA80AF700791EA9 /* AddExpenseView.swift */; };
@@ -41,6 +42,7 @@
 		3E231D082D82064300A23209 /* BudgetrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BudgetrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E33019B2DC858BE00FF2934 /* ExpenseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseStorage.swift; sourceTree = "<group>"; };
 		3E33019D2DC8719300FF2934 /* BudgetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetStorage.swift; sourceTree = "<group>"; };
+		3E33019F2DC9C90E00FF2934 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		3E4274612DA80AA900791EA9 /* Budget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		3E4274632DA80ACF00791EA9 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		3E4274652DA80AF700791EA9 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		3E231CE52D82064100A23209 = {
 			isa = PBXGroup;
 			children = (
+				3E33019F2DC9C90E00FF2934 /* ActivityView.swift */,
 				3E33019D2DC8719300FF2934 /* BudgetStorage.swift */,
 				3E33019B2DC858BE00FF2934 /* ExpenseStorage.swift */,
 				33A4DC842DC330C100E1C295 /* BudgetView.swift */,
@@ -268,6 +271,7 @@
 				3E33019C2DC858BE00FF2934 /* ExpenseStorage.swift in Sources */,
 				3E4274642DA80ACF00791EA9 /* Expense.swift in Sources */,
 				3E4274682DA80B1600791EA9 /* BudgetEditView.swift in Sources */,
+				3E3301A02DC9C90E00FF2934 /* ActivityView.swift in Sources */,
 				3E4274662DA80AF700791EA9 /* AddExpenseView.swift in Sources */,
 				3E4274622DA80AA900791EA9 /* Budget.swift in Sources */,
 				3E33019E2DC8719300FF2934 /* BudgetStorage.swift in Sources */,

@@ -65,10 +65,8 @@ struct BudgetEditView: View {
                                 .background(Color.gray.opacity(0.2))
                                 .foregroundColor(Color(hex: 0x9B8BF4))
                                 .cornerRadius(8)
-                                
                                 Button("Save") {
                                     budgetStorage.budget = Budget(name: name, limit: amountValue)
-                                    
                                 }
                                 .font(.custom("Avenir", size: 20))
                                 .frame(maxWidth: .infinity)
@@ -95,6 +93,10 @@ struct BudgetEditView: View {
                 Form {
                     Section(header: Text("Name")) {
                         Text(budgetStorage.budget?.name ?? "")
+                    }
+                    Section(header: Text("Values")) {
+                        Text("Total budget amount: $\(budgetStorage.budget?.limit ?? 0.0, specifier: "%.2f")")
+                        Text("Remaining: $\(budgetStorage.budget?.left ?? 0.0, specifier: "%.2f")")
                     }
                 }
                 .navigationBarTitleDisplayMode(.inline)

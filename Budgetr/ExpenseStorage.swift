@@ -9,5 +9,14 @@ import Foundation
 import Combine
 
 class ExpenseStorage: ObservableObject {
-    @Published var expenses: [Expense] = []
+    @Published var expenses: [Expense] = [
+        // dummy data, uncomment if necessary
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+//        Expense(category: "Dining Out", amount: 100, date: Date()),
+    ]
 }
