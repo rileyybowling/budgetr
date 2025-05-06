@@ -50,6 +50,14 @@ struct ContentView: View {
                             .rotationEffect(.degrees(-90))
                             .frame(width: 200, height: 200)
                             .animation(.easeInOut, value: progress)
+                        // Remaining amount in center of pie chart
+                        VStack {
+                            Text("$\(budgetStorage.budget?.left ?? 0.0, specifier: "%.2f")")
+                                .font(.custom("Avenir", size: 30))
+                                .bold()
+                            Text("remaining")
+                                .font(.custom("Avenir", size: 16))
+                        }
                     } else {
                         VStack(alignment: .center) {
                             Text("You do not have a budget.")
